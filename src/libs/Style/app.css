@@ -1,0 +1,34 @@
+body {
+  min-height: 100%;
+}
+#root {
+  min-height: 100%;
+}
+.intro .title {
+  color: white;
+}
+.ant-layout {
+  height: 100%;
+}
+.nav-active {
+  color: rgb(216, 61, 61);
+}
+.radius {
+  border-radius: 7px;
+}
+.cursor{
+cursor: pointer;
+}
+
+.ant-select,
+.ant-picker,
+.ant-input {
+  width: 60%;
+}
+@media only screen and (max-width: 760px) {
+  .ant-select,
+  .ant-picker,
+  .ant-input {
+    width: 100%;
+  }
+}
