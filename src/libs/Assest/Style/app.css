@@ -16,14 +16,16 @@ body {
 .radius {
   border-radius: 7px;
 }
-.cursor{
-cursor: pointer;
+.cursor {
+  cursor: pointer;
 }
 
 .ant-select,
+.ant-input-number,
 .ant-picker,
 .ant-input {
   width: 60%;
+  border-radius: 4px;
 }
 @media only screen and (max-width: 760px) {
   .ant-select,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ErrorMessage, Field, Formik, useFormik } from "formik";
-import { Select, Input, DatePicker, Radio, Checkbox, Button } from "antd";
+import { Select, Input, DatePicker, Radio, Checkbox, Button, InputNumber } from "antd";
 import moment from "moment";
 import store from "../StateManegment/Store";
 import { AddData, ADD_DATA, EditData, getData } from "../StateManegment/DataAction";
@@ -10,6 +10,11 @@ import { useHistory, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { _renderValidation } from "../Assest/Validation/Validation";
 import { _renderInitialValue } from "../Assest/InitioalValues/_renderInitialValue";
+import { CountryOption } from "../Assest/Data/CountryOption";
+import { CityOption } from "../Assest/Data/CityOption";
+import { JobOption } from "../Assest/Data/JobOption";
+import { TypeOption } from "../Assest/Data/TypeOption";
+import _renderLabel from "../Assest/Title/_renderLabel";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -22,13 +27,7 @@ export default function EditForm({id}) {
 
   const { viewData, loading } = useSelector((st) => st);
 
-  const optionCountry = [
-    { label: "Iran", value: "iran" },
-    { label: "India", value: "india" },
-    { label: "Italy", value: "italy" },
-    { label: "Iraq", value: "iraq" },
-    { label: "Ireland", value: "ireland" },
-  ];
+
 
   const history = useHistory();
 
@@ -42,65 +41,62 @@ export default function EditForm({id}) {
     setTimeout(() => history.push("/table"), 50);
   };
 
-  const workTypeOptions = ["Part time", "Full time", "Freelancer"];
-  const jobTypeOptions = ["Developer", "Seo", "Cto", "UI Designer", "DevOps"];
+  
   return (
     <div className={"p-3"}>
       <form onSubmit={formik.handleSubmit}>
         <div className="row">
           <div className="col-12 col-md-6 p-2">
             <div className="">
-              <label>User Name:</label>
+            {_renderLabel('First Name')}
             </div>
             <Input
               type="text"
-              name="firstName"
-             
+              name="firstName"            
               placeholder="First Name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
             />
-            {/* <ErrorMessage name="firstName" /> */}
+           {formik.errors.firstName && <span className={"d-flex text-danger"}>{formik.errors.firstName}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div className="">
-              <label>Last Name:</label>
+            {_renderLabel('Last Name')}
             </div>
             <Input
               type="text"
-              name="lastName"
-             
+              name="lastName"             
               placeholder="Last Name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
             />
-            {/* <ErrorMessage name="lastName" /> */}
+            {formik.errors.lastName && <span className={"d-flex text-danger"}>{formik.errors.lastName}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div className="">
-              <label>Age:</label>
+            {_renderLabel('Age')}
             </div>
-            <Input
+            <InputNumber
               type="number"
               name="age"
-             
               placeholder="Age"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.age}
             />
-            {/* <ErrorMessage name="age" /> */}
+           {formik.errors.age && <span className={"d-flex text-danger"}>{formik.errors.age}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
+            <div id="my-radio-group">
             <div id="my-radio-group">Gender:</div>
+            </div>
             <Radio.Group
-              name="gender"
-             
+              name="gender"            
               className={"mt-1"}
               value={formik.values.gender}
               onChange={formik.handleChange}
@@ -108,90 +104,85 @@ export default function EditForm({id}) {
               <Radio value="male">Male</Radio>
               <Radio value="female">Female</Radio>
             </Radio.Group>
-            {/* <ErrorMessage name="gender" /> */}
+            {formik.errors.gender && <span className={"d-flex text-danger"}>{formik.errors.gender}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div>
-              <label>BirthDay:</label>
+            {_renderLabel('Birthday')}
             </div>
             <DatePicker
               name="birthday"
-              placeholder="Birthday"
-             
+              placeholder="Birthday"             
               onChange={(e, value) => formik.setFieldValue("birthday", e)}
               onBlur={formik.handleBlur}
               value={moment(formik.values.birthday)}
             />
-          
-            {/* <ErrorMessage name="birthday" /> */}
+          {formik.errors.birthday && <span className={"d-flex text-danger"}>{formik.errors.birthday}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div>
-              <label>Country :</label>
+            {_renderLabel('Country')}
             </div>
             <Select
               name="country"
-              placeholder="Country"
-             
+              placeholder="Country"              
               onChange={(value) => formik.setFieldValue("country", value)}
               onBlur={formik.handleBlur}
               value={formik.values.country}
-              options={optionCountry}
-            />
-
-            {/* <ErrorMessage name="country" /> */}
+            >
+              {CountryOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+            </Select>
+            {formik.errors.country && <span className={"d-flex text-danger"}>{formik.errors.country}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div>
-              <label>City :</label>
+            {_renderLabel('City')}
             </div>
             <Select
               name="city"
               placeholder="City"
-             
               onChange={(value) => formik.setFieldValue("city", value)}
               onBlur={formik.handleBlur}
               defaultValue={formik.values.city}
-              options={optionCountry}
-            />
-
-            {/* <ErrorMessage name="country" /> */}
+          >
+{CityOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+          </Select>
+          {formik.errors.city && <span className={"d-flex text-danger"}>{formik.errors.city}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div>
-              <label>Job Title :</label>
+            {_renderLabel('Job Title')}
             </div>
             <Select
               name="jobTitle"
               placeholder="job Title"
-             
               onChange={(value) => formik.setFieldValue("jobTitle", value)}
               onBlur={formik.handleBlur}
               value={formik.values.jobTitle}
-              options={optionCountry}
-            />
+            >
+               {JobOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+            </Select>
 
-            {/* <ErrorMessage name="country" /> */}
+            {formik.errors.jobTitle && <span className={"d-flex text-danger"}>{formik.errors.jobTitle}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
             <div className="">
-              <label>Phone Number:</label>
+            {_renderLabel('Phone Number')}
             </div>
-            <Input
+            <InputNumber
               type="number"
               name="phone"
-             
               placeholder="Phone number"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
             />
-            {/* <ErrorMessage name="age" /> */}
+            {formik.errors.birthday && <span className={"d-flex text-danger"}>{formik.errors.phone}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -200,18 +191,17 @@ export default function EditForm({id}) {
             </div>
             <Checkbox.Group
               name="workType"
-             
               className={"mt-1"}
-              options={jobTypeOptions}
+              options={TypeOption}
               onChange={(value) => formik.setFieldValue("workType", value)}
               value={formik.values.workType}
             />
-            {/* <ErrorMessage name="age" /> */}
+      
           </div>
 
           <div className="col-12  p-2">
             <div>
-              <label>Description:</label>
+            {_renderLabel('Description')}
             </div>
             <TextArea
               rows={5}
@@ -223,7 +213,7 @@ export default function EditForm({id}) {
               onBlur={formik.handleBlur}
               value={formik.values.description}
             />
-            {/* <ErrorMessage name="age" /> */}
+         {formik.errors.description && <span className={"d-flex text-danger"}>{formik.errors.description}</span>}
           </div>
         </div>
 
@@ -236,8 +226,6 @@ export default function EditForm({id}) {
             Submit:
           </Button>
       </form>
-      {/* )} */}
-      {/* </Formik> */}
     </div>
   );
 }

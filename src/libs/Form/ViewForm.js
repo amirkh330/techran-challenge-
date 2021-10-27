@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { _renderValidation } from "../Assest/Validation/Validation";
+import { TypeOption } from "../Assest/Data/TypeOption";
+import { JobOption } from "../Assest/Data/JobOption";
+import { CityOption } from "../Assest/Data/CityOption";
+import { CountryOption } from "../Assest/Data/CountryOption";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -49,8 +53,7 @@ export default function ViewForm({disable}) {
     setTimeout(() => history.push("/table"), 50);
   };
 
-  const workTypeOptions = ["Part time", "Full time", "Freelancer"];
-  const jobTypeOptions = ["Developer", "Seo", "Cto", "UI Designer", "DevOps"];
+  
   return (
     <div className={"p-3"}>
       <form onSubmit={formik.handleSubmit}>
@@ -68,7 +71,7 @@ export default function ViewForm({disable}) {
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
             />
-            {/* <ErrorMessage name="firstName" /> */}
+            
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -84,7 +87,7 @@ export default function ViewForm({disable}) {
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
             />
-            {/* <ErrorMessage name="lastName" /> */}
+           
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -100,7 +103,7 @@ export default function ViewForm({disable}) {
               onBlur={formik.handleBlur}
               value={formik.values.age}
             />
-            {/* <ErrorMessage name="age" /> */}
+           
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -115,7 +118,7 @@ export default function ViewForm({disable}) {
               <Radio value="male">Male</Radio>
               <Radio value="female">Female</Radio>
             </Radio.Group>
-            {/* <ErrorMessage name="gender" /> */}
+            
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -131,7 +134,6 @@ export default function ViewForm({disable}) {
               value={moment(formik.values.birthday)}
             />
           
-            {/* <ErrorMessage name="birthday" /> */}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -145,8 +147,9 @@ export default function ViewForm({disable}) {
               onChange={(value) => formik.setFieldValue("country", value)}
               onBlur={formik.handleBlur}
               value={formik.values.country}
-              options={optionCountry}
-            />
+            >
+              {CountryOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+            </Select>
 
             {/* <ErrorMessage name="country" /> */}
           </div>
@@ -162,8 +165,9 @@ export default function ViewForm({disable}) {
               onChange={(value) => formik.setFieldValue("city", value)}
               onBlur={formik.handleBlur}
               defaultValue={formik.values.city}
-              options={optionCountry}
-            />
+          >
+{CityOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+          </Select>
 
             {/* <ErrorMessage name="country" /> */}
           </div>
@@ -174,13 +178,14 @@ export default function ViewForm({disable}) {
             </div>
             <Select
               name="jobTitle"
-              placeholder="job Title"
               disabled={disable}
+              placeholder="job Title"
               onChange={(value) => formik.setFieldValue("jobTitle", value)}
               onBlur={formik.handleBlur}
               value={formik.values.jobTitle}
-              options={optionCountry}
-            />
+            >
+               {JobOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
+            </Select>
 
             {/* <ErrorMessage name="country" /> */}
           </div>
@@ -207,15 +212,15 @@ export default function ViewForm({disable}) {
             </div>
             <Checkbox.Group
               name="workType"
-              disabled={disable}
               className={"mt-1"}
-              options={jobTypeOptions}
+              options={TypeOption}
+              disabled={disable}
               onChange={(value) => formik.setFieldValue("workType", value)}
               value={formik.values.workType}
             />
             {/* <ErrorMessage name="age" /> */}
           </div>
-
+          
           <div className="col-12  p-2">
             <div>
               <label>Description:</label>
@@ -230,18 +235,17 @@ export default function ViewForm({disable}) {
               onBlur={formik.handleBlur}
               value={formik.values.description}
             />
-            {/* <ErrorMessage name="age" /> */}
+        
           </div>
         </div>
 
     <Link to={"/table"}>
-          <Button type={"primary"} >
+          <Button type={"primary"} className={"radius"}>
             Go Back
           </Button>
         </Link>
       </form>
-      {/* )} */}
-      {/* </Formik> */}
+      
     </div>
   );
 }
