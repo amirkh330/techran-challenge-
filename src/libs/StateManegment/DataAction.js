@@ -1,5 +1,3 @@
-
-import store from "./Store";
 export const ADD_DATA = "ADD_DATA";
 export const FIELD_ADD = "FIELD_ADD";
 export const SUCCESS_ADD = "SUCCESS_ADD";
@@ -9,22 +7,14 @@ export const EDIT_DATA = "EDIT_DATA";
 
 export const AddData = (formData,callBack)=>async(dispatch)  =>  {
 
-    try {
+    
         dispatch({ type: ADD_DATA,formData,callBack });      
-    } catch (error) {
-        dispatch({ type: FIELD_ADD});
-    }
+    
   
 };
 
-export const EditData = (formData,callBack)=>async(dispatch)  =>  {
-
-    try {
-        dispatch({ type: EDIT_DATA,formData,callBack });      
-    } catch (error) {
-        dispatch({ type: FIELD_ADD});
-    }
-  
+export const EditData = (formData,index,callBack)=>async(dispatch)  =>  {
+        dispatch({ type: EDIT_DATA,formData,index,callBack });      
 };
 
 

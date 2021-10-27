@@ -1,4 +1,4 @@
-import { formModel } from "../Component/Models/formModel";
+import { formModel } from "../Assest/Models/formModel";
 import {
   ADD_DATA,
   DELETE_DATA,
@@ -13,7 +13,7 @@ const initialValue = {
   loading: false,
   formData: [],
   viewData: {},
-  editMode:false
+  editMode: false,
 };
 
 export const DataReducer = (state = initialValue, action) => {
@@ -37,29 +37,26 @@ export const DataReducer = (state = initialValue, action) => {
       return state;
 
     case DELETE_DATA:
-      state.formData.splice(action.index);
+      state.formData.splice(action.index, 1);
       state = { ...state };
-      console.log(state);
       return state;
 
     case GET_DATA:
-        console.log(1);
       state.viewData = state.formData[action.index];
-      return {...state,editMode:true};
+      return { ...state, editMode: true };
 
-      case EDIT_DATA:
-        const form2 = new formModel();
-        form2.setValues(action.formData);
-        state.formData[form2.key]=form2;
-        state = { ...state, loading: true };
-  
-        setTimeout(
-          () => store.dispatch({ type: SUCCESS_ADD, callBack: action.callBack }),
-          1000
-        );
-  
-        return state;
-      
+    case EDIT_DATA:
+      const form2 = new formModel();
+      form2.setValues(action.formData);
+      state.formData[action.index] = form2;
+      state = { ...state, loading: true };
+      setTimeout(
+        () => store.dispatch({ type: SUCCESS_ADD, callBack: action.callBack }),
+        1000
+      );
+
+      return state;
+
     default:
       return state;
   }

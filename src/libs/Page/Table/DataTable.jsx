@@ -10,7 +10,7 @@ export default function DataTable() {
 
   const { formData } = useSelector((st) => st);
 
-  useSelector((st) => console.log(st));
+  // useSelector((st) => console.log(st));
   
 
   

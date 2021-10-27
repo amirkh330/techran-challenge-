@@ -1,6 +1,6 @@
 import React from "react";
 import LayoutApp from "./libs/Layout/LayoutApp";
-import Routes from "./libs/Component/Routes/Routes";
+import Routes from "./libs/Routes/Routes";
 import store from "./libs/StateManegment/Store";
 import { Provider } from "react-redux";
 
