@@ -33,7 +33,7 @@ export default function NewForm(props) {
   
   const formik = useFormik({
     initialValues: _renderInitialValue,
-    validationSchema:_renderValidation,
+    validate:_renderValidation,
     onSubmit: (data) => store.dispatch( AddData(data, callBack)),
   });
 
@@ -42,7 +42,7 @@ export default function NewForm(props) {
   };
  
 
- 
+
   return (
     <div className={"p-3"}>
       <form onSubmit={formik.handleSubmit}>
@@ -59,7 +59,7 @@ export default function NewForm(props) {
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
             />
-             {formik.errors.firstName &&  <span className={"d-flex text-danger"}>{formik.errors.firstName}</span>}
+             {(formik.errors.firstName && formik.touched.firstName) && <span className={"d-flex text-danger"}>{formik.errors.firstName}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -74,7 +74,7 @@ export default function NewForm(props) {
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
             />
-            {formik.errors.lastName &&  <span className={"d-flex text-danger"}>{formik.errors.lastName}</span>}
+            {(formik.errors.lastName &&formik.touched.lastName) &&  <span className={"d-flex text-danger"}>{formik.errors.lastName}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -89,7 +89,7 @@ export default function NewForm(props) {
               onBlur={formik.handleBlur}
               value={formik.values.age}
             />
-            {formik.errors.age && <span className={"d-flex text-danger"}>{formik.errors.age}</span>}
+            {(formik.errors.age && formik.touched.age) && <span className={"d-flex text-danger"}>{formik.errors.age}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -103,7 +103,7 @@ export default function NewForm(props) {
               <Radio value="male">Male</Radio>
               <Radio value="female">Female</Radio>
             </Radio.Group>
-            {formik.errors.gender && <span className={"d-flex text-danger"}>{formik.errors.gender}</span>}
+            {(formik.errors.gender &&formik.touched.gender )&& <span className={"d-flex text-danger"}>{formik.errors.gender}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -113,12 +113,12 @@ export default function NewForm(props) {
             <DatePicker
               name="birthday"
               placeholder="Birthday"
-              onChange={(e, value) => formik.setFieldValue("birthday", e)}
+              onChange={(e) => formik.setFieldValue("birthday", e)}
               onBlur={formik.handleBlur}
-              value={moment(formik.values.birthday)}
+              value={formik.values.birthday}
             />
           
-          {formik.errors.birthday && <span className={"d-flex text-danger"}>{formik.errors.birthday}</span>}
+          {(formik.errors.birthday && formik.touched.birthday) && <span className={"d-flex text-danger"}>{formik.errors.birthday}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -135,7 +135,7 @@ export default function NewForm(props) {
               {CountryOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
             </Select>
 
-            {formik.errors.country && <span className={"d-flex text-danger"}>{formik.errors.country}</span>}
+            {(formik.errors.country && formik.touched.country) && <span className={"d-flex text-danger"}>{formik.errors.country}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -152,7 +152,7 @@ export default function NewForm(props) {
 {CityOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
           </Select>
 
-          {formik.errors.city && <span className={"d-flex text-danger"}>{formik.errors.city}</span>}
+          {(formik.errors.city && formik.touched.city )&& <span className={"d-flex text-danger"}>{formik.errors.city}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -169,7 +169,7 @@ export default function NewForm(props) {
                {JobOption.map(opt=>{return <Option value={opt}>{opt}</Option>})}
             </Select>
 
-            {formik.errors.jobTitle && <span className={"d-flex text-danger"}>{formik.errors.jobTitle}</span>}
+            {(formik.errors.jobTitle && formik.touched.jobTitle) && <span className={"d-flex text-danger"}>{formik.errors.jobTitle}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -184,7 +184,7 @@ export default function NewForm(props) {
               onBlur={formik.handleBlur}
               value={formik.values.phone}
             />
-              {formik.errors.phone && <span className={"d-flex text-danger"}>{formik.errors.phone}</span>}
+              {(formik.errors.phone &&formik.touched.phone )&& <span className={"d-flex text-danger"}>{formik.errors.phone}</span>}
           </div>
 
           <div className="col-12 col-md-6 p-2">
@@ -215,7 +215,7 @@ export default function NewForm(props) {
               onBlur={formik.handleBlur}
               value={formik.values.description}
             />
-             {formik.errors.description && <span className={"d-flex text-danger"}>{formik.errors.description}</span>}
+             {(formik.errors.description &&formik.touched.description )&& <span className={"d-flex text-danger"}>{formik.errors.description}</span>}
           </div>
         </div>
 

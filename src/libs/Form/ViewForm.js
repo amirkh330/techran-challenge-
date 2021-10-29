@@ -23,16 +23,9 @@ const { TextArea } = Input;
 export default function ViewForm({disable}) {
   
 
-  useEffect(() => {
-    // const query = new URLSearchParams(props.location.search);
-    // const status = query.get("status");
-    // const id = query.get("id");
-    // id && store.dispatch(getData(id));
 
-    // status && status === "view" && setDisable(true);
-  }, []);
 
-  const { viewData, loading, editMode } = useSelector((st) => st);
+  const { viewData} = useSelector((st) => st);
   const optionCountry = [
     { label: "Iran", value: "iran" },
     { label: "India", value: "india" },
@@ -46,7 +39,6 @@ export default function ViewForm({disable}) {
   
   const formik = useFormik({
     initialValues: viewData ,
-
   });
 
   const callBack = () => {
