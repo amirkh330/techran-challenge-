@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Popconfirm, Spin, Table } from "antd";
 import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
