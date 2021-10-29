@@ -8,10 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function DataTable() {
 
-  const { formData } = useSelector((st) => st);
-
-  // useSelector((st) => console.log(st));
-  
+  const { formData } = useSelector((st) => st);  
 
   
 
@@ -97,7 +94,7 @@ export default function DataTable() {
 
   return (
     <div>
-      <div className="p-3">
+      <div className="p-3 table-responsive ">
         {formData ? (
           <Table
             dataSource={dataSource}
